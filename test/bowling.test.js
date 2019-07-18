@@ -20,7 +20,16 @@ describe('score', () => {
   it('should return correct score if a spare is present and next frame is a spare', () => {
     expect(score('1/ 1/ 11 -- -- -- -- -- -- --')).to.equal(24);
   });
-  it('should return correct score if a spare is present and next frame is a spare', () => {
-    expect(score('1/ 1/ 11 -- -- -- -- -- -- --')).to.equal(24);
+  it('should return correct score if a strike is present and next frame is gutters', () => {
+    expect(score('X -- -- -- -- -- -- -- -- --')).to.equal(10);
+  });
+  it('should return correct score if a strike is present and next frame is greater than 0', () => {
+    expect(score('X 11 -- -- -- -- -- -- -- --')).to.equal(14);
+  });
+  it('should return correct score if a strike is present and next frame is a strike', () => {
+    expect(score('X X 11 -- -- -- -- -- -- --')).to.equal(35);
+  });
+  it('should return correct score if a strike is present and next frame is a spare', () => {
+    expect(score('X 1/ -- -- -- -- -- -- -- --')).to.equal(30);
   });
 });
