@@ -1,14 +1,15 @@
 'use strict';
 
-const score = require('../bowling');
+// const score = require('../bowling');
+const score = require('../bowling-stack-recursion');
 
 const { expect } = require('chai');
 
 describe('score', () => {
-  it('should return 0 if all gutter balls rolled', () => {
+  it.only('should return 0 if all gutter balls rolled', () => {
     expect(score('-- -- -- -- -- -- -- -- -- --')).to.equal(0);
   });
-  it('should return 10 if 1 pin per frame was destroyed', () => {
+  it.only('should return 10 if 1 pin per frame was destroyed', () => {
     expect(score('1- 1- 1- 1- 1- 1- 1- 1- 1- 1-')).to.equal(10);
   });
   it('should return correct score if a spare is present and next frame is gutters', () => {
