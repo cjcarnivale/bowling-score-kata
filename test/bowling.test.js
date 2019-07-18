@@ -35,4 +35,13 @@ describe('score', () => {
   it('should return correct score if every frame is a spare plus extra roll in final frame', () => {
     expect(score('5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5')).to.equal(150);
   });
+  it('should return correct score if every frame is a strike with an additional two strikes in the final frame', () => {
+    //If three strikes in the final frame are considered as counting for two
+    //additional frames, a for loop has to be used instead of a reduce to break
+    //the loop early as you do not want to score them as seperate frames.
+    expect(score('X X X X X X X X X XXX')).to.equal(300);
+  });
+  it('should return the correct score with a mix of strikes, spares, and gutters', () => {
+    expect(score('8/ 54 9- X X 5/ 53 63 9/ 9/X')).to.equal(149);
+  });
 });
