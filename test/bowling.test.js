@@ -32,4 +32,7 @@ describe('score', () => {
   it('should return correct score if a strike is present and next frame is a spare', () => {
     expect(score('X 1/ -- -- -- -- -- -- -- --')).to.equal(30);
   });
+  it('should return correct score if every frame is a spare plus extra roll in final frame', () => {
+    expect(score('5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5')).to.equal(150);
+  });
 });
