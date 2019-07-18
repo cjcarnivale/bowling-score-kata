@@ -30,7 +30,7 @@ function calculateStrike(i, frameArr){
 }
 
 function calculateSpare(i, frameArr){
-  return 10 + simpleScore(frameArr[i+1][0]); 
+  return 10 + simpleScore((frameArr[i][2] || frameArr[i+1][0])); 
 }
 
 function simpleScore(roll, diff){ 
