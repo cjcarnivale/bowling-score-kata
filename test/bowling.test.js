@@ -36,9 +36,9 @@ describe('score', () => {
     expect(score('5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5')).to.equal(150);
   });
   it('should return correct score if every frame is a strike with an additional two strikes in the final frame', () => {
-    //If three strikes in the final frame are considered as counting for two
-    //additional frames, a for loop has to be used instead of a reduce to break
-    //the loop early as you do not want to score them as seperate frames.
+    //If three strikes in the final frame are scored as two additional frames,
+    //a for loop should be used instead of a reduce to break the loop early
+    //because they shouldn't be scored as seperate frames
     expect(score('X X X X X X X X X XXX')).to.equal(300);
   });
   it('should return the correct score with a mix of strikes, spares, and gutters', () => {
