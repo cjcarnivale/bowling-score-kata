@@ -43,8 +43,12 @@ function frameScore(frame, previousFrame, nextPreviousFrame){
 }
 
 function calculateSpare(frame, previousFrame){
-  let score = 0; 
-  score =  (10 - parseInt(frame[0]) + frameScore(previousFrame[0]));
+  let score = 0;
+  if (frame.length === 3){ 
+    score = parseInt(frame[2]);
+  } else{
+    score =  (10 - parseInt(frame[0]) + frameScore(previousFrame[0]));
+  } 
   return score; 
 }
 
