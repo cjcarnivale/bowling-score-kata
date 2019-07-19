@@ -7,33 +7,54 @@ module.exports = function main(frames){
   frames.split(' ').forEach(frame => {
     framesStack.push(frame);
   });
-  return frameScore(framesStack);
+  return gameScore(framesStack);
 };
 
-function frameScore(framesStack, previousFrame){
+function gameScore(framesStack, previousFrame, nextPreviousFrame){
   //Base case
   if(framesStack.isEmpty()){
     return 0; 
   }
+  let previousFrame = null; 
+  let nextPreviousFrame = null;
   let currentFrame = framesStack.pop();
-  let score = simpleScore(currentFrame, previousFrame);
+  let totalScore = frameScore(currentFrame, previousFrame, nextPreviousFrame);
+  
+  nextPreviousFrame = previousFrame; 
   previousFrame = currentFrame;
-  return score + frameScore(framesStack, previousFrame);
+
+  return totalScore + gameScore(framesStack, previousFrame, nextPreviousFrame);
 }
 
-function simpleScore(frame, previousFrame){
+function frameScore(frame, previousFrame, nextPreviousFrame){
   const rolls = frame.split('');
-  let rollsScore = 0; 
+  let score = 0; 
   rolls.forEach(roll => { 
     if(roll === '-'){
-      rollsScore += 0; 
+      score += 0; 
     } else if (roll === '/'){
-      rollsScore += (10 - parseInt(rolls[0]) + simpleScore(previousFrame[0])); 
+      score += calculateSpare(frame, previousFrame); 
     } else if(roll === 'X'){
-      rollsScore = (10 + simpleScore(previousFrame)); 
+      score = calculateStrike(previousFrame, nextPreviousFrame); 
     }else { 
-      rollsScore += parseInt(roll);
+      score += parseInt(roll);
     }
   }); 
-  return rollsScore; 
+  return score; 
+}
+
+function calculateSpare(frame, previousFrame){
+  let score = 0; 
+  score =  (10 - parseInt(frame[0]) + frameScore(previousFrame[0]));
+  return score; 
+}
+
+function calculateStrike(previousFrame, nextPreviousFrame){
+  let score = 0;
+  if (previousFrame.length === 1){ 
+    score = 10 + 10 + (frameScore(nextPreviousFrame[0])); 
+  } else{
+    score = (10 + frameScore(previousFrame));
+  }
+  return score;  
 }

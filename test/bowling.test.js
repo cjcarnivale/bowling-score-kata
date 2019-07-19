@@ -27,7 +27,7 @@ describe('score', () => {
   it.only('should return correct score if a strike is present and next frame is greater than 0', () => {
     expect(score('X 11 -- -- -- -- -- -- -- --')).to.equal(14);
   });
-  it('should return correct score if a strike is present and next frame is a strike', () => {
+  it.only('should return correct score if a strike is present and next frame is a strike', () => {
     expect(score('X X 11 -- -- -- -- -- -- --')).to.equal(35);
   });
   it('should return correct score if a strike is present and next frame is a spare', () => {
