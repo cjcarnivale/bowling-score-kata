@@ -27,8 +27,10 @@ function simpleScore(frame, previousFrame){
   rolls.forEach(roll => { 
     if(roll === '-'){
       rollsScore += 0; 
-    } else if ( roll === '/'){
+    } else if (roll === '/'){
       rollsScore += (10 - parseInt(rolls[0]) + simpleScore(previousFrame[0])); 
+    } else if(roll === 'X'){
+      rollsScore = 10; 
     }else { 
       rollsScore += parseInt(roll);
     }
