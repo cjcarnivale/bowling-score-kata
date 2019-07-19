@@ -10,12 +10,13 @@ module.exports = function main(frames){
   return frameScore(framesStack);
 };
 
-function frameScore(frames){
+function frameScore(framesStack){
   //Base case
-  if(frames.isEmpty()){
-    let score = simpleScore(frames.pop());
-    return score + frameScore(frames);
+  if(framesStack.isEmpty()){
+    return 0; 
   }
+  let score = simpleScore(framesStack.pop());
+  return score + frameScore(framesStack);
 }
 
 function simpleScore(frame){ 
