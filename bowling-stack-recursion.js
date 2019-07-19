@@ -18,7 +18,6 @@ function frameScore(framesStack, previousFrame){
   let currentFrame = framesStack.pop();
   let score = simpleScore(currentFrame, previousFrame);
   previousFrame = currentFrame;
-  console.log(previousFrame); 
   return score + frameScore(framesStack, previousFrame);
 }
 
