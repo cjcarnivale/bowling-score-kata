@@ -34,7 +34,7 @@ function frameScore(frame, previousFrame, nextPreviousFrame){
     } else if (roll === '/'){
       score += calculateSpare(frame, previousFrame); 
     } else if(roll === 'X'){
-      score = calculateStrike(previousFrame, nextPreviousFrame); 
+      score = calculateStrike(frame, previousFrame, nextPreviousFrame); 
     }else { 
       score += parseInt(roll);
     }
@@ -52,15 +52,19 @@ function calculateSpare(frame, previousFrame){
   return score; 
 }
 
-function calculateStrike(previousFrame, nextPreviousFrame){
-  let score = 0;
-  if (previousFrame.length === 1){ 
-    score = 10 + 10 + (frameScore(nextPreviousFrame[0])); 
-  } else if(previousFrame[1] === '/'){
+function calculateStrike(frame, previousFrame, nextPreviousFrame){
+  let score = 0; 
+  if (frame.length === 3){
+    score = 20; 
+  } else if (previousFrame && previousFrame.length === 1){ 
+    score = 20 + frameScore(previousFrame[0]) + frameScore(nextPreviousFrame[0]); 
+  } else if(previousFrame && previousFrame[1] === '/'){
     score = 20; 
   } 
   else{
-    score = (10 + frameScore(previousFrame));
+    if (previousFrame){
+      score = (10 + frameScore(previousFrame));
+    }
   }
   return score;  
 }
