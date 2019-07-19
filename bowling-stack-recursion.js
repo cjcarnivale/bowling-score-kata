@@ -15,8 +15,7 @@ function gameScore(framesStack, previousFrame, nextPreviousFrame){
   if(framesStack.isEmpty()){
     return 0; 
   }
-  let previousFrame = null; 
-  let nextPreviousFrame = null;
+
   let currentFrame = framesStack.pop();
   let totalScore = frameScore(currentFrame, previousFrame, nextPreviousFrame);
   
@@ -53,7 +52,10 @@ function calculateStrike(previousFrame, nextPreviousFrame){
   let score = 0;
   if (previousFrame.length === 1){ 
     score = 10 + 10 + (frameScore(nextPreviousFrame[0])); 
-  } else{
+  } else if(previousFrame[1] === '/'){
+    score = 20; 
+  } 
+  else{
     score = (10 + frameScore(previousFrame));
   }
   return score;  
