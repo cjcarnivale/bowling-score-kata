@@ -22,10 +22,12 @@ function frameScore(framesStack){
 function simpleScore(frame){ 
   const rolls = frame.split('');
   let rollsScore = 0; 
-  rolls.forEach(roll => {
+  rolls.forEach(roll => { 
     if(roll === '-'){
       rollsScore += 0; 
-    } else { 
+    } else if ( roll === '/'){
+      rollsScore += (10 - parseInt(rolls[0])); 
+    }else { 
       rollsScore += parseInt(roll);
     }
   }); 

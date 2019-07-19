@@ -12,7 +12,7 @@ describe('score', () => {
   it.only('should return 10 if 1 pin per frame was destroyed', () => {
     expect(score('1- 1- 1- 1- 1- 1- 1- 1- 1- 1-')).to.equal(10);
   });
-  it('should return correct score if a spare is present and next frame is gutters', () => {
+  it.only('should return correct score if a spare is present and next frame is gutters', () => {
     expect(score('1/ -- -- -- -- -- -- -- -- --')).to.equal(10);
   });
   it('should return correct score if a spare is present and next frame is greater than 0', () => {
