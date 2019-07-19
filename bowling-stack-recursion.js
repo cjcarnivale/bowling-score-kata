@@ -30,7 +30,7 @@ function simpleScore(frame, previousFrame){
     } else if (roll === '/'){
       rollsScore += (10 - parseInt(rolls[0]) + simpleScore(previousFrame[0])); 
     } else if(roll === 'X'){
-      rollsScore = 10; 
+      rollsScore = (10 + simpleScore(previousFrame)); 
     }else { 
       rollsScore += parseInt(roll);
     }
