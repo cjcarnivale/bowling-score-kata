@@ -10,23 +10,26 @@ module.exports = function main(frames){
   return frameScore(framesStack);
 };
 
-function frameScore(framesStack){
+function frameScore(framesStack, previousFrame){
   //Base case
   if(framesStack.isEmpty()){
     return 0; 
   }
-  let score = simpleScore(framesStack.pop());
-  return score + frameScore(framesStack);
+  let currentFrame = framesStack.pop();
+  let score = simpleScore(currentFrame, previousFrame);
+  previousFrame = currentFrame;
+  console.log(previousFrame); 
+  return score + frameScore(framesStack, previousFrame);
 }
 
-function simpleScore(frame){ 
+function simpleScore(frame, previousFrame){
   const rolls = frame.split('');
   let rollsScore = 0; 
   rolls.forEach(roll => { 
     if(roll === '-'){
       rollsScore += 0; 
     } else if ( roll === '/'){
-      rollsScore += (10 - parseInt(rolls[0])); 
+      rollsScore += (10 - parseInt(rolls[0]) + simpleScore(previousFrame[0])); 
     }else { 
       rollsScore += parseInt(roll);
     }
