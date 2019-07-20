@@ -26,45 +26,42 @@ function gameScore(framesStack, previousFrame, nextPreviousFrame){
 }
 
 function frameScore(frame, previousFrame, nextPreviousFrame){
-  const rolls = frame.split('');
-  let score = 0; 
-  rolls.forEach(roll => { 
-    if(roll === '-'){
-      score += 0; 
-    } else if (roll === '/'){
-      score += calculateSpare(frame, previousFrame); 
-    } else if(roll === 'X'){
-      score = calculateStrike(frame, previousFrame, nextPreviousFrame); 
-    }else { 
-      score += parseInt(roll);
-    }
-  }); 
-  return score; 
+  if (frame.includes('/')){
+    return calculateSpare(frame, previousFrame);
+  } 
+  if(frame.includes('X')){
+    return calculateStrike(frame, previousFrame, nextPreviousFrame); 
+  } 
+  return simpleScore(frame[0]) + simpleScore(frame[1]);
 }
 
 function calculateSpare(frame, previousFrame){
-  let score = 0;
   if (frame.length === 3){ 
-    score = parseInt(frame[2]);
-  } else{
-    score =  (10 - parseInt(frame[0]) + frameScore(previousFrame[0]));
-  } 
-  return score; 
+    return 10 + simpleScore(frame[2]);
+  }
+  return (10 + simpleScore(previousFrame[0])); 
 }
 
 function calculateStrike(frame, previousFrame, nextPreviousFrame){
-  let score = 0; 
   if (frame.length === 3){
-    score = 20; 
-  } else if (previousFrame && previousFrame.length === 1){ 
-    score = 20 + frameScore(previousFrame[0]) + frameScore(nextPreviousFrame[0]); 
-  } else if(previousFrame && previousFrame[1] === '/'){
-    score = 20; 
-  } 
-  else{
-    if (previousFrame){
-      score = (10 + frameScore(previousFrame));
-    }
+    return 30; 
   }
-  return score;  
+  if (previousFrame.includes('/')){
+    return 20; 
+  }
+  return (10 + simpleScore(previousFrame[0]) + 
+    (previousFrame[1] 
+      ? simpleScore(previousFrame[1]) 
+      : simpleScore(nextPreviousFrame[0]))
+  ); 
+}
+
+function simpleScore(roll){
+  if (roll === '-'){
+    return 0; 
+  }
+  if (roll === 'X'){
+    return 10; 
+  }
+  return parseInt(roll); 
 }
