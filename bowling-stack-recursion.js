@@ -24,7 +24,11 @@ function gameScore(rollStack, currentRoll = rollStack.pop(), previousRoll, nextP
     nextRoll = rollStack.pop(); 
     frameScore += (10 + gameScore(rollStack, previousRoll)); 
   } else if (currentRoll === 'X'){
-    frameScore += (10 + gameScore(rollStack, previousRoll) + gameScore(rollStack, nextPreviousRoll)); 
+    if (previousRoll === 'X'){
+      return 10; 
+    }
+    frameScore += (10 + gameScore(rollStack, previousRoll, 'X') + gameScore(rollStack, nextPreviousRoll, 'X')); 
+    console.log(frameScore);
   } 
   else {
     frameScore += parseInt(currentRoll); 
