@@ -15,6 +15,14 @@ function gameScore(rollStack, previousRoll, nextPreviousRoll){
   if(rollStack.isEmpty()){
     return 0; 
   }
-  rollStack.pop(); 
-  return 0 + gameScore(rollStack); 
+  let currentRoll = rollStack.pop();
+  
+  if (currentRoll === '-'){
+    return 0 + gameScore(rollStack); 
+  }
+
+  if (currentRoll === '/'){
+    return 10; 
+  }
+  return parseInt(currentRoll) + gameScore(rollStack); 
 }
