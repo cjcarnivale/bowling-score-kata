@@ -30,8 +30,7 @@ function calculateStrike(i, frameArr) {
     const secondNextRoll = frameArr[i + 1][1] || frameArr[i + 2][0];
     //In the case that a strike is followed by a spare, to get the value
     //of the second roll, the first roll must be passed down.
-    bonus =
-      simpleScore(nextRoll) + simpleScore(secondNextRoll, frameArr[i + 1][0]);
+    bonus = simpleScore(nextRoll) + simpleScore(secondNextRoll, frameArr[i + 1][0]);
   }
   return 10 + bonus;
 }

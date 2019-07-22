@@ -6,7 +6,7 @@ const score = require('../bowling-stack-recursion');
 const { expect } = require('chai');
 
 describe('score', () => {
-  it('should return 0 if all gutter balls rolled', () => {
+  it.only('should return 0 if all gutter balls rolled', () => {
     expect(score('-- -- -- -- -- -- -- -- -- --')).to.equal(0);
   });
   it('should return 10 if 1 pin per frame was destroyed', () => {
