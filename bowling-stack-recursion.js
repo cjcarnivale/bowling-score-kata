@@ -24,13 +24,14 @@ function gameScore(rollStack, currentRoll = rollStack.pop(), previousRoll, nextP
     nextRoll = rollStack.pop(); 
     frameScore += (10 + gameScore(rollStack, previousRoll)); 
   } else if (currentRoll === 'X'){
-    return 10; 
+    frameScore += (10 + gameScore(rollStack, previousRoll) + gameScore(rollStack, nextPreviousRoll)); 
   } 
   else {
     frameScore += parseInt(currentRoll); 
   }
-  
+
+  nextPreviousRoll = previousRoll;
   previousRoll = currentRoll;
 
-  return frameScore + gameScore(rollStack, (rollStack.pop() || nextRoll), previousRoll); 
+  return frameScore + gameScore(rollStack, (rollStack.pop() || nextRoll), previousRoll, nextPreviousRoll); 
 }
