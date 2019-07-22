@@ -23,7 +23,10 @@ function gameScore(rollStack, currentRoll = rollStack.pop(), previousRoll, nextP
   } else if (currentRoll === '/'){
     nextRoll = rollStack.pop(); 
     frameScore += (10 + gameScore(rollStack, previousRoll)); 
-  } else {
+  } else if (currentRoll === 'X'){
+    return 10; 
+  } 
+  else {
     frameScore += parseInt(currentRoll); 
   }
   
