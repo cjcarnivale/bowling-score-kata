@@ -10,19 +10,24 @@ module.exports = function main(frames){
   return gameScore(rollStack);
 };
 
-function gameScore(rollStack, previousRoll, nextPreviousRoll){
+function gameScore(rollStack, currentRoll = rollStack.pop(), previousRoll, nextPreviousRoll){
+  let frameScore = 0;
+  let nextRoll = null; 
   //Base case
-  if(rollStack.isEmpty()){
+  if(currentRoll === 'Underflow'){
     return 0; 
   }
-  let currentRoll = rollStack.pop();
   
   if (currentRoll === '-'){
-    return 0 + gameScore(rollStack); 
+    frameScore += 0;   
+  } else if (currentRoll === '/'){
+    nextRoll = rollStack.pop(); 
+    frameScore += (10 + gameScore(rollStack, previousRoll)); 
+  } else {
+    frameScore += parseInt(currentRoll); 
   }
+  
+  previousRoll = currentRoll;
 
-  if (currentRoll === '/'){
-    return 10; 
-  }
-  return parseInt(currentRoll) + gameScore(rollStack); 
+  return frameScore + gameScore(rollStack, (rollStack.pop() || nextRoll), previousRoll); 
 }
